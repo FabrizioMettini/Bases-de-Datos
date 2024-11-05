@@ -50,16 +50,19 @@ CREATE UNIQUE INDEX id_titulo_libro ON Libro(Titulo);
 INSERT INTO Autor (Nombre, Apellido, Nacionalidad, Residencia) VALUES
 ("Tomas", "Maiza", "Surinamés", "Paramaribo"),
 ("Alejandro", "Rodriguez Costello", "Argentino", "Rosario"),
+("Agustin Eloy", "Fernandez Berge", "Cubano", "La Habana"),
 ("Luciano", "Belardo", "Argentino", "Rosario");
 
 INSERT INTO Libro (ISBN, Titulo, Editorial, Precio) VALUES
 ("10-11-12-13-14", "1001 chistes para armar y colorear", "Alfaguara", "10000"),
 ("5-4-3-2-1", "Yo", "UNR", "30000"),
+("2-2-2-2-2", "Boquitas Pintadas", "UNR", "60000"),
 ("1-1-1-1-1", "La impresionante historia de como di una vuelta a la manzana", "Grupo Editorial Planeta", "8000");
 
 INSERT INTO Escribe (id_autor, isbn_libro, Año) VALUES
 ((SELECT MIN(ID) FROM Autor WHERE Apellido = "Maiza"), "10-11-12-13-14", "2020-07-07"),
 ((SELECT MIN(ID) FROM Autor WHERE Apellido = "Rodriguez Costello"), "5-4-3-2-1", "1997-02-21"),
+((SELECT MIN(ID) FROM Autor WHERE Apellido = "Fernandez Berge"), "2-2-2-2-2", "1998-07-19"),
 ((SELECT MIN(ID) FROM Autor WHERE Apellido = "Belardo"), "1-1-1-1-1", "2010-08-12");
 
 -- Ejercicio 4
@@ -77,22 +80,26 @@ UPDATE Libro SET Precio = 1.1*Precio
 WHERE Editorial = "UNR";
 
 -- c)
-UPDATE Libro SET Precio = CASE WHEN Precio > 200 
-                          THEN Precio*1.10
-                          ELSE Precio*1.20 END
-WHERE ISBN IN (SELECT isbn_libro FROM Escribe, Autor
-                WHERE Nacionalidad <> "Argentina" AND Nacionalidad <> "Argentino"
-                  AND ID = id_autor);
+--UPDATE Libro SET Precio = CASE WHEN Precio > 200 
+--                          THEN Precio*1.10
+--                          ELSE Precio*1.20 END
+--WHERE ISBN IN (SELECT isbn_libro FROM Escribe, Autor
+--                WHERE Nacionalidad <> "Argentina" AND Nacionalidad <> "Argentino"
+--                  AND ID = id_autor);
 
 -- mayor a 200 = +20%
--- UPDATE Libro SET Precio = 1.20*Precio
--- WHERE Nacionalidad != "Argentina" AND Nacionalidad != "Argentino"
---   AND Precio > 200;
+UPDATE Libro SET Precio = 1.20*Precio
+WHERE ISBN IN (SELECT isbn_libro FROM Escribe, Autor
+    WHERE Nacionalidad != "Argentina" AND Nacionalidad != "Argentino"
+      AND ID = id_autor)
+  AND Precio > 200;
 
 -- menor a 200 = +10%
--- UPDATE Libro SET Precio = 1.10*Precio
--- WHERE Nacionalidad != "Argentina" AND Nacionalidad != "Argentino"
---  AND Precio <= 200;
+UPDATE Libro SET Precio = 1.10*Precio
+WHERE ISBN IN (SELECT isbn_libro FROM Escribe, Autor
+    WHERE Nacionalidad != "Argentina" AND Nacionalidad != "Argentino"
+      AND ID = id_autor)
+  AND Precio <= 200;
 
 -- d)
 
