@@ -1,4 +1,7 @@
--- Andres Grillo (), Santiago Libonati (L-3256/5), Fabrizio Mettini ()
+-- Integrantes:
+-- Andres Grillo (G-5811/4)
+-- Santiago Libonati (L-3256/5)
+-- Fabrizio Mettini (M-6842/1)
 
 -- Ejercicio 1
 

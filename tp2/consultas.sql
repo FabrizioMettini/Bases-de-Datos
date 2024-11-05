@@ -1,3 +1,8 @@
+-- Integrantes: 
+-- Andres Grillo (G-5811/4)
+-- Santiago Libonati (L-3256/5)
+-- Fabrizio Mettini (M-6842/1)
+
 -- EJERCICIO 5
 
 -- a) Obtener los nombres de los duenios de los inmuebles.
