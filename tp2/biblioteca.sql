@@ -22,14 +22,13 @@ CREATE TABLE Autor (
     PRIMARY KEY (ID)
 );
 
--- Capaz explicar la eleccion de ISBN???
 -- ISBN es una clave de entre 10 y 13 caracteres con hasta 4 guiones
 -- que separan distintos grupos de la clave. Por lo que tomamos el
 -- tamaño maximo que pueden tener
 CREATE TABLE Libro (
     ISBN VARCHAR(17) NOT NULL,
     Titulo VARCHAR(60) NOT NULL,
-    Editorial VARCHAR(30) NOT NULL,
+    Editorial VARCHAR(60) NOT NULL,
     Precio INT NOT NULL,
     PRIMARY KEY (ISBN)
 );
@@ -46,6 +45,8 @@ CREATE TABLE Escribe (
 -- Ejercicio 2
 
 CREATE INDEX id_apellido_autor ON Autor(Apellido);
+
+-- Suponemos que los titulos de libros son unicos
 CREATE UNIQUE INDEX id_titulo_libro ON Libro(Titulo);
 
 -- Ejercicio 3
@@ -60,7 +61,7 @@ INSERT INTO Libro (ISBN, Titulo, Editorial, Precio) VALUES
 ("10-11-12-13-14", "1001 chistes para armar y colorear", "Alfaguara", "10000"),
 ("5-4-3-2-1", "Yo", "UNR", "30000"),
 ("2-2-2-2-2", "Boquitas Pintadas", "UNR", "60000"),
-("1-1-1-1-1", "La impresionante historia de como di una vuelta a la manzana", "Grupo Editorial Planeta", "8000");
+("1-1-1-1-1", "La impresionante historia de como di una vuelta a la manzana", "Grupo Editorial Planeta", "200");
 
 INSERT INTO Escribe (id_autor, isbn_libro, Año) VALUES
 ((SELECT MIN(ID) FROM Autor WHERE Apellido = "Maiza"), "10-11-12-13-14", "2020-07-07"),
