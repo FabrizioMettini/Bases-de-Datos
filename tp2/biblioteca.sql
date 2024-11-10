@@ -45,9 +45,7 @@ CREATE TABLE Escribe (
 -- Ejercicio 2
 
 CREATE INDEX id_apellido_autor ON Autor(Apellido);
-
--- Suponemos que los titulos de libros son unicos
-CREATE UNIQUE INDEX id_titulo_libro ON Libro(Titulo);
+CREATE INDEX id_titulo_libro ON Libro(Titulo);
 
 -- Ejercicio 3
 
